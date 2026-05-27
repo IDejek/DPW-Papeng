@@ -580,4 +580,9 @@ class PSI_Papeng_Members {
         $table = $this->get_table();
 
         wp_send_json_success( array(
-            'total'
+                        'total'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table" ),
+            'verified' => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE status = 'verified'" ),
+            'pending'  => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE status = 'pending'" ),
+        ) );
+    }
+}
