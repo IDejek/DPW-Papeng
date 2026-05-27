@@ -197,7 +197,7 @@ class PSI_Papeng_Admin_Panel {
                         <a href="<?php echo esc_url( admin_url( 'admin.php?page=psi-papeng-activity' ) ); ?>" class="psi-quick-link-btn">
                             <span class="dashicons dashicons-history"></span> <?php esc_html_e( 'Log Aktivitas', 'psi-papeng-premium' ); ?>
                         </a>
-                        <a href="<?php echo esc_url( admin_url( 'admin.php?page=psi-papeng-smtp' ); ?>" class="psi-quick-link-btn">
+                        <a href="<?php echo esc_url( admin_url( 'admin.php?page=psi-papeng-smtp' ) ); ?>" class="psi-quick-link-btn">
                             <span class="dashicons dashicons-email-alt"></span> <?php esc_html_e( 'Pengaturan SMTP', 'psi-papeng-premium' ); ?>
                         </a>
                         <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=slider' ) ); ?>" class="psi-quick-link-btn">
