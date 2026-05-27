@@ -1,28 +1,35 @@
 <?php
 /**
  * 404 Error Page
- * @package DPW_PSIPapeng
+ *
+ * @package DPW_PSI_Papeng
  */
+
 defined( 'ABSPATH' ) || exit;
+
 get_header();
 ?>
 
-<section class="dpw-404-section">
+<!-- Page Header -->
+<section class="page-header">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 text-center dpw-animate-on-scroll">
-                <div class="dpw-404-code">404</div>
-                <h1 class="fw-bold mb-3"><?php esc_html_e( 'Halaman Tidak Ditemukan', 'dpw-psi-papeng' ); ?></h1>
-                <p class="text-muted mb-4 lh-lg"><?php esc_html_e( 'Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan gunakan menu navigasi atau tombol di bawah ini.', 'dpw-psi-papeng' ); ?></p>
-                <div class="d-flex gap-3 justify-content-center">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-danger fw-bold px-4">
-                        <i class="bi bi-house me-2"></i><?php esc_html_e( 'Ke Beranda', 'dpw-psi-papeng' ); ?>
-                    </a>
-                    <a href="<?php echo esc_url( home_url( '/kontak/' ) ); ?>" class="btn btn-outline-dark fw-bold px-4">
-                        <i class="bi bi-envelope me-2"></i><?php esc_html_e( 'Hubungi Kami', 'dpw-psi-papeng' ); ?>
-                    </a>
-                </div>
-                <?php get_search_form(); ?>
+        <div class="page-header-content">
+            <?php dpw_psi_breadcrumb(); ?>
+            <h1><?php esc_html_e( 'Halaman Tidak Ditemukan', 'dpw-psi-papeng' ); ?></h1>
+        </div>
+    </div>
+</section>
+
+<!-- 404 Content -->
+<section class="profile-content">
+    <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 40px 0;">
+            <div style="font-family: 'Poppins', sans-serif; font-size: 8rem; font-weight: 800; background: linear-gradient(135deg, #D6001C, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">404</div>
+            <h2 style="margin-top: 16px; margin-bottom: 16px;"><?php esc_html_e( 'Oops! Halaman tidak ditemukan', 'dpw-psi-papeng' ); ?></h2>
+            <p><?php esc_html_e( 'Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.', 'dpw-psi-papeng' ); ?></p>
+            <div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-primary btn-lg"><i class="bi bi-house-door"></i> <?php esc_html_e( 'Kembali ke Beranda', 'dpw-psi-papeng' ); ?></a>
+                <a href="<?php echo esc_url( get_post_type_archive_link( 'psi-news' ) ); ?>" class="btn btn-outline-dark btn-lg"><?php esc_html_e( 'Lihat Berita', 'dpw-psi-papeng' ); ?></a>
             </div>
         </div>
     </div>
