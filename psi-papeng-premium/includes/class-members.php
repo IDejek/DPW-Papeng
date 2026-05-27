@@ -569,20 +569,33 @@ class PSI_Papeng_Members {
         ) );
     }
 
-    /**
+        /**
      * AJAX: Get Stats
      */
     public function ajax_get_stats() {
-        check_ajax_referer( 'psi_papeng_admin_nonce', 'nonce' );
-        if ( ! current_user_can( 'manage_options' ) ) wp_send_json_error( 'Unauthorized' );
+        check_ajax_referer('psi_papeng_admin_nonce', 'nonce');
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => 'Unauthorized'));
+            return; // WSOD Fix: Selalu return setelah wp_send_json_error
+        }
 
         global $wpdb;
         $table = $this->get_table();
 
-        wp_send_json_success( array(
-                        'total'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table" ),
-            'verified' => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE status = 'verified'" ),
-            'pending'  => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE status = 'pending'" ),
-        ) );
+        // WSOD Fix: Gunakan isset check karena table bisa null di PHP 8
+        if (empty($table)) {
+            wp_send_json_error(array('message' => 'Table not found'));
+            return;
+        }
+
+        $total = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table");
+        $verified = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table WHERE status = 'verified'");
+        $pending = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table WHERE status = 'pending'");
+
+        wp_send_json_success(array(
+            'total' => $total,
+            'verified' => $verified,
+            'pending' => $pending,
+        ));
     }
 }
