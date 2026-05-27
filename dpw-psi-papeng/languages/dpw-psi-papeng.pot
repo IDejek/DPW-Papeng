@@ -1,0 +1,312 @@
+# DPW PSI Papua Pegunungan Theme Translation Template
+# Copyright (C) 2026 Iqbal Tombinawa
+# This file is distributed under the GPL v2.
+msgid ""
+msgstr ""
+"Project-Id-Version: DPW PSI Papua Pegunungan 1.0.0\n"
+"Report-Msgid-Bugs-To: tombinawaiqbal@gmail.com\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: Iqbal Tombinawa <tombinawaiqbal@gmail.com>\n"
+"Language-Team: Indonesian <id@li.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Primary Menu"
+msgstr "Menu Utama"
+
+msgid "Footer Menu"
+msgstr "Menu Footer"
+
+msgid "Mobile Menu"
+msgstr "Menu Mobile"
+
+msgid "Slider"
+msgstr "Slider"
+
+msgid "Slide"
+msgstr "Slide"
+
+msgid "Tambah Slide Baru"
+msgstr ""
+
+msgid "Edit Slide"
+msgstr ""
+
+msgid "Semua Slide"
+msgstr ""
+
+msgid "Pimpinan"
+msgstr ""
+
+msgid "Tambah Pimpinan"
+msgstr ""
+
+msgid "Edit Pimpinan"
+msgstr ""
+
+msgid "Semua Pimpinan"
+msgstr ""
+
+msgid "Lihat Profil"
+msgstr ""
+
+msgid "Bidang Organisasi"
+msgstr ""
+
+msgid "Tambah Bidang"
+msgstr ""
+
+msgid "Edit Bidang"
+msgstr ""
+
+msgid "Semua Bidang"
+msgstr ""
+
+msgid "DPD Kabupaten"
+msgstr ""
+
+msgid "Tambah DPD Kabupaten"
+msgstr ""
+
+msgid "Edit DPD"
+msgstr ""
+
+msgid "Semua DPD"
+msgstr ""
+
+msgid "Lihat DPD"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "Tambah Video"
+msgstr ""
+
+msgid "Edit Video"
+msgstr ""
+
+msgid "Semua Video"
+msgstr ""
+
+msgid "Galeri"
+msgstr ""
+
+msgid "Tambah Galeri"
+msgstr ""
+
+msgid "Edit Galeri"
+msgstr ""
+
+msgid "Semua Galeri"
+msgstr ""
+
+msgid "Sambutan Ketua"
+msgstr ""
+
+msgid "Pimpinan DPW PSI Papua Pegunungan"
+msgstr ""
+
+msgid "Organisasi"
+msgstr ""
+
+msgid "Bidang Organisasi"
+msgstr ""
+
+msgid "Berita"
+msgstr ""
+
+msgid "Berita Terkini"
+msgstr ""
+
+msgid "Kegiatan Video"
+msgstr ""
+
+msgid "Bergabunglah Bersama Kami"
+msgstr ""
+
+msgid "Jadilah bagian dari perubahan nyata untuk Papua Pegunungan. Bersama PSI, kita wujudkan keadilan dan solidaritas."
+msgstr ""
+
+msgid "Kirim Pesan"
+msgstr ""
+
+msgid "Hubungi Kami"
+msgstr ""
+
+msgid "Ke Beranda"
+msgstr ""
+
+msgid "Halaman Tidak Ditemukan"
+msgstr ""
+
+msgid "Daftar Anggota"
+msgstr ""
+
+msgid "Lihat Semua"
+msgstr ""
+
+msgid "Lihat Profil Lengkap"
+msgstr ""
+
+msgid "Baca"
+msgstr ""
+
+msgid "Lihat Semua Berita"
+msgstr ""
+
+msgid "Lihat Semua Video"
+msgstr ""
+
+msgid "Lihat Semua DPD"
+msgstr ""
+
+msgid "Pimpinan Lainnya"
+msgstr ""
+
+msgid "Berita Terkait"
+msgstr ""
+
+msgid "Komentar"
+msgstr ""
+
+msgid "Tinggalkan Komentar"
+msgstr ""
+
+msgid "Komentar ditutup."
+msgstr ""
+
+msgid "Nama"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
+msgid "Struktur Organisasi"
+msgstr ""
+
+msgid "Pimpinan Utama"
+msgstr ""
+
+msgid "Pengurus Lainnya"
+msgstr ""
+
+msgid "Data pimpinan belum tersedia."
+msgstr ""
+
+msgid "Data bidang organisasi belum tersedia."
+msgstr ""
+
+msgid "Belum ada berita."
+msgstr ""
+
+msgid "Belum ada galeri."
+msgstr ""
+
+msgid "Belum ada video."
+msgstr ""
+
+msgid "Belum ada konten."
+msgstr ""
+
+msgid "Hasil Pencarian"
+msgstr ""
+
+msgid "Tidak ada hasil yang ditemukan untuk pencarian tersebut."
+msgstr ""
+
+msgid "Dikembangkan oleh %s"
+msgstr ""
+
+msgid "Teks Topbar"
+msgstr ""
+
+msgid "Telepon"
+msgstr ""
+
+msgid "Alamat"
+msgstr ""
+
+msgid "Nomor WhatsApp (tanpa +)"
+msgstr ""
+
+msgid "Google Maps Embed Code"
+msgstr ""
+
+msgid "Media Sosial"
+msgstr ""
+
+msgid "Judul"
+msgstr ""
+
+msgid "Isi Sambutan"
+msgstr ""
+
+msgid "Foto Ketua"
+msgstr ""
+
+msgid "Deskripsi Footer"
+msgstr ""
+
+msgid "Teks Copyright"
+msgstr ""
+
+msgid "URL Pendaftaran Anggota"
+msgstr ""
+
+msgid "Teks Tombol Daftar"
+msgstr ""
+
+msgid "Kategori Video"
+msgstr ""
+
+msgid "Kategori Galeri"
+msgstr ""
+
+msgid "Semua"
+msgstr ""
+
+msgid "Alamat"
+msgstr ""
+
+msgid "Lokasi Kami"
+msgstr ""
+
+msgid "Chat via WhatsApp"
+msgstr ""
+
+msgid "Ikuti Kami"
+msgstr ""
+
+msgid "Informasi Kontak"
+msgstr ""
+
+msgid "Kembali ke atas"
+msgstr ""
+
+msgid "Bagikan:"
+msgstr ""
+
+msgid "Anggota"
+msgstr ""
+
+msgid "Kabupaten"
+msgstr ""
+
+msgid "%s Anggota"
+msgstr ""
+
+msgid "Ketua:"
+msgstr ""
+
+msgid "Ketua DPD"
+msgstr ""
+
+msgid "WhatsApp Kami"
+msgstr ""
