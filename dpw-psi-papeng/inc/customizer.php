@@ -7,97 +7,83 @@
 defined( 'ABSPATH' ) || exit;
 
 add_action( 'customize_register', 'dpw_psi_customize_register' );
-function dpw_psi_customize_register( WP_Customize_Manager $wp_customize ): void {
+function dpw_psi_customize_register( $wp_customize ): void {
 
-    /* ── Topbar Section ────────────────────────────────────── */
-    $wp_customize->add_section( 'dpw_topbar', [
-        'title'    => __( 'Topbar & Jam', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_topbar', array(
+        'title'    => 'Topbar & Jam',
         'priority' => 20,
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_show_topbar', [ 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ] );
-    $wp_customize->add_control( 'dpw_psi_show_topbar', [
-        'section' => 'dpw_topbar',
-        'label'   => __( 'Tampilkan Topbar', 'dpw-psi-papeng' ),
-        'type'    => 'checkbox',
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_topbar_text', [ 'default' => 'Dewan Pimpinan Wilayah Partai Solidaritas Indonesia Papua Pegunungan', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_topbar_text', [
-        'section' => 'dpw_topbar',
-        'label'   => __( 'Teks Topbar', 'dpw-psi-papeng' ),
-        'type'    => 'text',
-    ] );
+    ) );
+    $wp_customize->add_setting( 'dpw_psi_show_topbar', array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'dpw_psi_show_topbar', array( 'section' => 'dpw_topbar', 'label' => 'Tampilkan Topbar', 'type' => 'checkbox' ) );
+    $wp_customize->add_setting( 'dpw_psi_topbar_text', array( 'default' => 'Dewan Pimpinan Wilayah Partai Solidaritas Indonesia Papua Pegunungan', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_topbar_text', array( 'section' => 'dpw_topbar', 'label' => 'Teks Topbar', 'type' => 'text' ) );
 
-    /* ── Contact Section ───────────────────────────────────── */
-    $wp_customize->add_section( 'dpw_contact', [
-        'title'    => __( 'Informasi Kontak', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_contact', array(
+        'title'    => 'Informasi Kontak',
         'priority' => 25,
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_contact_phone', [ 'default' => '+62 822 6721 8125', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_contact_phone', [ 'section' => 'dpw_contact', 'label' => __( 'Telepon', 'dpw-psi-papeng' ), 'type' => 'text' ] );
-    $wp_customize->add_setting( 'dpw_psi_contact_email', [ 'default' => 'tombinawaiqbal@gmail.com', 'sanitize_callback' => 'sanitize_email' ] );
-    $wp_customize->add_control( 'dpw_psi_contact_email', [ 'section' => 'dpw_contact', 'label' => __( 'Email', 'dpw-psi-papeng' ), 'type' => 'email' ] );
-    $wp_customize->add_setting( 'dpw_psi_contact_address', [ 'default' => 'Papua Pegunungan, Indonesia', 'sanitize_callback' => 'sanitize_textarea_field' ] );
-    $wp_customize->add_control( 'dpw_psi_contact_address', [ 'section' => 'dpw_contact', 'label' => __( 'Alamat', 'dpw-psi-papeng' ), 'type' => 'textarea' ] );
-    $wp_customize->add_setting( 'dpw_psi_whatsapp_number', [ 'default' => '6282267218125', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_whatsapp_number', [ 'section' => 'dpw_contact', 'label' => __( 'Nomor WhatsApp (tanpa +)', 'dpw-psi-papeng' ), 'type' => 'text' ] );
-    $wp_customize->add_setting( 'dpw_psi_map_embed', [ 'default' => '', 'sanitize_callback' => 'wp_kses_post' ] );
-    $wp_customize->add_control( 'dpw_psi_map_embed', [ 'section' => 'dpw_contact', 'label' => __( 'Google Maps Embed Code', 'dpw-psi-papeng' ), 'type' => 'textarea' ] );
+    ) );
+    $wp_customize->add_setting( 'dpw_psi_contact_phone', array( 'default' => '+62 822 6721 8125', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_contact_phone', array( 'section' => 'dpw_contact', 'label' => 'Telepon', 'type' => 'text' ) );
+    $wp_customize->add_setting( 'dpw_psi_contact_email', array( 'default' => 'tombinawaiqbal@gmail.com', 'sanitize_callback' => 'sanitize_email' ) );
+    $wp_customize->add_control( 'dpw_psi_contact_email', array( 'section' => 'dpw_contact', 'label' => 'Email', 'type' => 'email' ) );
+    $wp_customize->add_setting( 'dpw_psi_contact_address', array( 'default' => 'Papua Pegunungan, Indonesia', 'sanitize_callback' => 'sanitize_textarea_field' ) );
+    $wp_customize->add_control( 'dpw_psi_contact_address', array( 'section' => 'dpw_contact', 'label' => 'Alamat', 'type' => 'textarea' ) );
+    $wp_customize->add_setting( 'dpw_psi_whatsapp_number', array( 'default' => '6282267218125', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_whatsapp_number', array( 'section' => 'dpw_contact', 'label' => 'Nomor WhatsApp (tanpa +)', 'type' => 'text' ) );
+    $wp_customize->add_setting( 'dpw_psi_map_embed', array( 'default' => '', 'sanitize_callback' => 'wp_kses_post' ) );
+    $wp_customize->add_control( 'dpw_psi_map_embed', array( 'section' => 'dpw_contact', 'label' => 'Google Maps Embed Code', 'type' => 'textarea' ) );
 
-    /* ── Social Media Section ──────────────────────────────── */
-    $wp_customize->add_section( 'dpw_social', [
-        'title'    => __( 'Media Sosial', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_social', array(
+        'title'    => 'Media Sosial',
         'priority' => 30,
-    ] );
-    $socials = [
-        'facebook'  => [ 'label' => 'Facebook', 'placeholder' => 'https://facebook.com/...' ],
-        'twitter'   => [ 'label' => 'Twitter/X', 'placeholder' => 'https://twitter.com/...' ],
-        'instagram' => [ 'label' => 'Instagram', 'placeholder' => 'https://instagram.com/...' ],
-        'youtube'   => [ 'label' => 'YouTube', 'placeholder' => 'https://youtube.com/...' ],
-        'tiktok'    => [ 'label' => 'TikTok', 'placeholder' => 'https://tiktok.com/...' ],
-        'linkedin'  => [ 'label' => 'LinkedIn', 'placeholder' => 'https://linkedin.com/...' ],
-    ];
+    ) );
+    $socials = array(
+        'facebook'  => array( 'label' => 'Facebook', 'placeholder' => 'https://facebook.com/' ),
+        'twitter'   => array( 'label' => 'Twitter/X', 'placeholder' => 'https://twitter.com/' ),
+        'instagram' => array( 'label' => 'Instagram', 'placeholder' => 'https://instagram.com/' ),
+        'youtube'   => array( 'label' => 'YouTube', 'placeholder' => 'https://youtube.com/' ),
+        'tiktok'    => array( 'label' => 'TikTok', 'placeholder' => 'https://tiktok.com/' ),
+        'linkedin'  => array( 'label' => 'LinkedIn', 'placeholder' => 'https://linkedin.com/' ),
+    );
     foreach ( $socials as $key => $s ) {
-        $wp_customize->add_setting( 'dpw_psi_social_' . $key, [ 'default' => '', 'sanitize_callback' => 'esc_url_raw' ] );
-        $wp_customize->add_control( 'dpw_psi_social_' . $key, [
+        $wp_customize->add_setting( 'dpw_psi_social_' . $key, array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
+        $wp_customize->add_control( 'dpw_psi_social_' . $key, array(
             'section'     => 'dpw_social',
             'label'       => $s['label'],
             'type'        => 'url',
-            'input_attrs' => [ 'placeholder' => $s['placeholder'] ],
-        ] );
+            'input_attrs' => array( 'placeholder' => $s['placeholder'] ),
+        ) );
     }
 
-    /* ── Welcome Section ───────────────────────────────────── */
-    $wp_customize->add_section( 'dpw_welcome', [
-        'title'    => __( 'Sambutan Ketua', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_welcome', array(
+        'title'    => 'Sambutan Ketua',
         'priority' => 35,
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_welcome_title', [ 'default' => 'Sambutan Ketua DPW', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_welcome_title', [ 'section' => 'dpw_welcome', 'label' => __( 'Judul', 'dpw-psi-papeng' ), 'type' => 'text' ] );
-    $wp_customize->add_setting( 'dpw_psi_welcome_text', [ 'default' => '', 'sanitize_callback' => 'wp_kses_post' ] );
-    $wp_customize->add_control( 'dpw_psi_welcome_text', [ 'section' => 'dpw_welcome', 'label' => __( 'Isi Sambutan', 'dpw-psi-papeng' ), 'type' => 'textarea' ] );
-    $wp_customize->add_setting( 'dpw_psi_welcome_image', [ 'default' => '', 'sanitize_callback' => 'esc_url_raw' ] );
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dpw_psi_welcome_image', [
+    ) );
+    $wp_customize->add_setting( 'dpw_psi_welcome_title', array( 'default' => 'Sambutan Ketua DPW', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_welcome_title', array( 'section' => 'dpw_welcome', 'label' => 'Judul', 'type' => 'text' ) );
+    $wp_customize->add_setting( 'dpw_psi_welcome_text', array( 'default' => '', 'sanitize_callback' => 'wp_kses_post' ) );
+    $wp_customize->add_control( 'dpw_psi_welcome_text', array( 'section' => 'dpw_welcome', 'label' => 'Isi Sambutan', 'type' => 'textarea' ) );
+    $wp_customize->add_setting( 'dpw_psi_welcome_image', array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dpw_psi_welcome_image', array(
         'section' => 'dpw_welcome',
-        'label'   => __( 'Foto Ketua', 'dpw-psi-papeng' ),
-    ] ) );
+        'label'   => 'Foto Ketua',
+    ) ) );
 
-    /* ── Footer Section ────────────────────────────────────── */
-    $wp_customize->add_section( 'dpw_footer', [
-        'title'    => __( 'Footer', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_footer', array(
+        'title'    => 'Footer',
         'priority' => 40,
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_footer_text', [ 'default' => 'Dewan Pimpinan Wilayah Partai Solidaritas Indonesia Papua Pegunungan', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_footer_text', [ 'section' => 'dpw_footer', 'label' => __( 'Deskripsi Footer', 'dpw-psi-papeng' ), 'type' => 'text' ] );
-    $wp_customize->add_setting( 'dpw_psi_footer_copyright', [ 'default' => '&copy; 2026 DPW PSI Papua Pegunungan. All rights reserved.', 'sanitize_callback' => 'wp_kses_post' ] );
-    $wp_customize->add_control( 'dpw_psi_footer_copyright', [ 'section' => 'dpw_footer', 'label' => __( 'Teks Copyright', 'dpw-psi-papeng' ), 'type' => 'textarea' ] );
+    ) );
+    $wp_customize->add_setting( 'dpw_psi_footer_text', array( 'default' => 'Dewan Pimpinan Wilayah Partai Solidaritas Indonesia Papua Pegunungan', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_footer_text', array( 'section' => 'dpw_footer', 'label' => 'Deskripsi Footer', 'type' => 'text' ) );
+    $wp_customize->add_setting( 'dpw_psi_footer_copyright', array( 'default' => '&copy; 2026 DPW PSI Papua Pegunungan. All rights reserved.', 'sanitize_callback' => 'wp_kses_post' ) );
+    $wp_customize->add_control( 'dpw_psi_footer_copyright', array( 'section' => 'dpw_footer', 'label' => 'Teks Copyright', 'type' => 'textarea' ) );
 
-    /* ── Membership CTA ────────────────────────────────────── */
-    $wp_customize->add_section( 'dpw_membership', [
-        'title'    => __( 'Keanggotaan', 'dpw-psi-papeng' ),
+    $wp_customize->add_section( 'dpw_membership', array(
+        'title'    => 'Keanggotaan',
         'priority' => 45,
-    ] );
-    $wp_customize->add_setting( 'dpw_psi_membership_url', [ 'default' => 'https://psi.id/menjadi-anggota', 'sanitize_callback' => 'esc_url_raw' ] );
-    $wp_customize->add_control( 'dpw_psi_membership_url', [ 'section' => 'dpw_membership', 'label' => __( 'URL Pendaftaran Anggota', 'dpw-psi-papeng' ), 'type' => 'url' ] );
-    $wp_customize->add_setting( 'dpw_psi_membership_text', [ 'default' => 'Daftar Anggota', 'sanitize_callback' => 'sanitize_text_field' ] );
-    $wp_customize->add_control( 'dpw_psi_membership_text', [ 'section' => 'dpw_membership', 'label' => __( 'Teks Tombol Daftar', 'dpw-psi-papeng' ), 'type' => 'text' ] );
+    ) );
+    $wp_customize->add_setting( 'dpw_psi_membership_url', array( 'default' => 'https://psi.id/menjadi-anggota', 'sanitize_callback' => 'esc_url_raw' ) );
+    $wp_customize->add_control( 'dpw_psi_membership_url', array( 'section' => 'dpw_membership', 'label' => 'URL Pendaftaran Anggota', 'type' => 'url' ) );
+    $wp_customize->add_setting( 'dpw_psi_membership_text', array( 'default' => 'Daftar Anggota', 'sanitize_callback' => 'sanitize_text_field' ) );
+    $wp_customize->add_control( 'dpw_psi_membership_text', array( 'section' => 'dpw_membership', 'label' => 'Teks Tombol Daftar', 'type' => 'text' ) );
 }
