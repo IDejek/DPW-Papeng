@@ -57,21 +57,21 @@ function dpw_psi_enqueue_assets(): void {
         null
     );
 
-    /* Bootstrap 5 */
-    wp_enqueue_style(
-        'bootstrap',
-        DPW_PSI_URI . '/assets/css/bootstrap.min.css',
-        [],
-        '5.3.3'
-    );
+    /* Bootstrap 5 — CDN */
+wp_enqueue_style(
+    'bootstrap',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+    [],
+    '5.3.3'
+);
 
-    /* Bootstrap Icons */
-    wp_enqueue_style(
-        'bootstrap-icons',
-        DPW_PSI_URI . '/assets/css/bootstrap-icons.min.css',
-        [],
-        '1.11.3'
-    );
+    /* Bootstrap Icons — CDN */
+wp_enqueue_style(
+    'bootstrap-icons',
+    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',
+    [],
+    '1.11.3'
+);
 
     /* Theme CSS */
     wp_enqueue_style(
@@ -81,14 +81,14 @@ function dpw_psi_enqueue_assets(): void {
         DPW_PSI_VERSION
     );
 
-    /* Bootstrap JS */
-    wp_enqueue_script(
-        'bootstrap-bundle',
-        DPW_PSI_URI . '/assets/js/bootstrap.bundle.min.js',
-        [],
-        '5.3.3',
-        true
-    );
+    /* Bootstrap JS Bundle — CDN */
+wp_enqueue_script(
+    'bootstrap-bundle',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
+    [],
+    '5.3.3',
+    true
+);
 
     /* Clock JS */
     wp_enqueue_script(
