@@ -27,11 +27,15 @@ class PSI_Papeng_Email {
         $phpmailer->Host       = $smtp_host;
         $phpmailer->Port       = absint( get_option( 'psi_smtp_port', 587 ) );
         $phpmailer->SMTPAuth   = (bool) get_option( 'psi_smtp_auth', true );
+
+        $from_raw   = get_option( 'psi_smtp_from', get_option( 'admin_email' ) );
+        $from_name  = get_option( 'psi_smtp_from_name', get_bloginfo( 'name' ) );
+
         $phpmailer->Username   = get_option( 'psi_smtp_user', '' );
         $phpmailer->Password   = get_option( 'psi_smtp_pass', '' );
         $phpmailer->SMTPSecure = in_array( get_option( 'psi_smtp_secure', 'tls' ), [ 'tls', 'ssl' ], true ) ? get_option( 'psi_smtp_secure', 'tls' ) : 'tls';
-        $phpmailer->From       = get_option( 'psi_smtp_from', get_option( 'admin_email' ) );
-        $phpmailer->FromName   = get_option( 'psi_smtp_from_name', get_bloginfo( 'name' ) );
+        $phpmailer->From       = sanitize_email( str_replace( [ "\r", "\n" ], '', $from_raw ) );
+        $phpmailer->FromName   = sanitize_text_field( str_replace( [ "\r", "\n" ], '', $from_name ) );
     }
 
     public static function send_registration_notification( array $member, int $member_id ): bool {
@@ -41,7 +45,6 @@ class PSI_Papeng_Email {
 
         $sent = wp_mail( $to, $subject, $body );
 
-        // Also send confirmation to member
         $member_subject = __( 'Pendaftaran Berhasil — DPW PSI Papua Pegunungan', 'psi-papeng-premium' );
         $member_body    = self::get_template( 'registration-member', $member );
         wp_mail( $member['email'], $member_subject, $member_body );
@@ -86,7 +89,7 @@ class PSI_Papeng_Email {
                 $content .= self::email_row( 'Kabupaten', $kab );
                 $content .= self::email_row( 'Pendidikan', is_object( $data ) ? $data->education : ( $data['education'] ?? '-' ) );
                 $content .= '</table>';
-                $content .= '<p style="margin-top:20px;"><a href="' . admin_url( 'admin.php?page=psi-papeng-members' ) . '" style="background:#D6001C;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Kelola Anggota</a></p>';
+                $content .= '<p style="margin-top:20px;"><a href="' . esc_url( admin_url( 'admin.php?page=psi-papeng-members' ) ) . '" style="background:#D6001C;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Kelola Anggota</a></p>';
                 $content .= '</div>';
                 break;
 
