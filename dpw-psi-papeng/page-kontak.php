@@ -1,115 +1,105 @@
 <?php
 /**
- * Template Name: Halaman Kontak
- * @package DPW_PSIPapeng
+ * Template Name: Kontak
+ *
+ * @package DPW_PSI_Papeng
  */
+
 defined( 'ABSPATH' ) || exit;
+
 get_header();
 
- $phone   = dpw_psi_get_option( 'contact_phone', '+62 822 6721 8125' );
- $email   = dpw_psi_get_option( 'contact_email', 'tombinawaiqbal@gmail.com' );
- $address = dpw_psi_get_option( 'contact_address', 'Papua Pegunungan, Indonesia' );
- $map     = dpw_psi_get_option( 'map_embed', '' );
+ $contact_info = get_option( 'dpw_psi_contact', array() );
+ $wa_number    = ! empty( $contact_info['whatsapp'] ) ? $contact_info['whatsapp'] : '+62 822 6721 8125';
+ $map_url      = ! empty( $contact_info['map_url'] ) ? $contact_info['map_url'] : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127711.50101711885!2d140.55!3d-4.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPapua+Pegunungan!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid';
 ?>
 
-<section class="dpw-page-header">
+<!-- Page Header -->
+<section class="page-header">
     <div class="container">
-        <div class="dpw-page-header-inner dpw-animate-on-scroll">
-            <?php dpw_psi_breadcrumbs(); ?>
-            <h1 class="dpw-page-title"><?php echo esc_html( get_the_title() ); ?></h1>
+        <div class="page-header-content">
+            <?php dpw_psi_breadcrumb(); ?>
+            <h1><?php the_title(); ?></h1>
+            <p><?php esc_html_e( 'Hubungi kami untuk informasi lebih lanjut.', 'dpw-psi-papeng' ); ?></p>
         </div>
     </div>
 </section>
 
-<section class="dpw-section">
+<!-- Contact Content -->
+<section class="profile-content">
     <div class="container">
-        <!-- Contact Info Cards -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-4 dpw-animate-on-scroll">
-                <div class="dpw-contact-info-card card border-0 shadow-sm text-center p-4 h-100">
-                    <div class="dpw-contact-icon mb-3"><i class="bi bi-geo-alt-fill"></i></div>
-                    <h6 class="fw-bold mb-2"><?php esc_html_e( 'Alamat', 'dpw-psi-papeng' ); ?></h6>
-                    <p class="text-muted small mb-0"><?php echo esc_html( $address ); ?></p>
-                </div>
-            </div>
-            <div class="col-md-4 dpw-animate-on-scroll" data-delay="100">
-                <div class="dpw-contact-info-card card border-0 shadow-sm text-center p-4 h-100">
-                    <div class="dpw-contact-icon mb-3"><i class="bi bi-telephone-fill"></i></div>
-                    <h6 class="fw-bold mb-2"><?php esc_html_e( 'Telepon', 'dpw-psi-papeng' ); ?></h6>
-                    <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>" class="text-muted small text-decoration-none"><?php echo esc_html( $phone ); ?></a>
-                </div>
-            </div>
-            <div class="col-md-4 dpw-animate-on-scroll" data-delay="200">
-                <div class="dpw-contact-info-card card border-0 shadow-sm text-center p-4 h-100">
-                    <div class="dpw-contact-icon mb-3"><i class="bi bi-envelope-fill"></i></div>
-                    <h6 class="fw-bold mb-2"><?php esc_html_e( 'Email', 'dpw-psi-papeng' ); ?></h6>
-                    <a href="mailto:<?php echo esc_attr( $email ); ?>" class="text-muted small text-decoration-none"><?php echo esc_html( $email ); ?></a>
-                </div>
-            </div>
-        </div>
+        <div class="contact-grid">
+            <!-- Left: Info -->
+            <div class="psi-animate-left">
+                <h2 style="margin-bottom: 8px;"><?php esc_html_e( 'Informasi Kontak', 'dpw-psi-papeng' ); ?></h2>
+                <p style="margin-bottom: 32px;"><?php esc_html_e( 'Kami siap membantu Anda. Silakan hubungi kami melalui salah satu kanal berikut.', 'dpw-psi-papeng' ); ?></p>
 
-        <div class="row g-5">
-            <!-- Contact Form -->
-            <div class="col-lg-6 dpw-animate-on-scroll">
-                <h3 class="fw-bold mb-4"><?php esc_html_e( 'Kirim Pesan', 'dpw-psi-papeng' ); ?></h3>
-                <?php echo do_shortcode( '[psi_contact_form]' ); ?>
-            </div>
+                <div class="contact-info-cards">
+                    <div class="contact-info-card">
+                        <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4><?php esc_html_e( 'Alamat Kantor', 'dpw-psi-papeng' ); ?></h4>
+                            <p><?php echo esc_html( ! empty( $contact_info['address'] ) ? $contact_info['address'] : 'Papua Pegunungan, Indonesia' ); ?></p>
+                        </div>
+                    </div>
 
-            <!-- Map & WhatsApp -->
-            <div class="col-lg-6 dpw-animate-on-scroll" data-delay="200">
-                <h3 class="fw-bold mb-4"><?php esc_html_e( 'Lokasi Kami', 'dpw-psi-papeng' ); ?></h3>
-                <?php if ( $map ) : ?>
-                <div class="dpw-map-wrapper rounded-3 overflow-hidden shadow-sm mb-4">
-                    <?php echo dpw_psi_safe_html( $map ); ?>
-                </div>
-                <?php else : ?>
-                <div class="dpw-map-placeholder bg-light rounded-3 d-flex align-items-center justify-content-center mb-4" style="height:300px">
-                    <div class="text-center text-muted">
-                        <i class="bi bi-geo-alt fs-1 d-block mb-2"></i>
-                        <small><?php esc_html_e( 'Peta akan ditampilkan setelah konfigurasi Google Maps.', 'dpw-psi-papeng' ); ?></small>
+                    <div class="contact-info-card">
+                        <div class="icon-box"><i class="bi bi-envelope-fill"></i></div>
+                        <div>
+                            <h4><?php esc_html_e( 'Email Resmi', 'dpw-psi-papeng' ); ?></h4>
+                            <p><a href="mailto:<?php echo esc_attr( ! empty( $contact_info['email'] ) ? $contact_info['email'] : 'info@psipapeng.id' ); ?>"><?php echo esc_html( ! empty( $contact_info['email'] ) ? $contact_info['email'] : 'info@psipapeng.id' ); ?></a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="icon-box" style="background: rgba(37,211,102,0.1); color: #25D366;"><i class="bi bi-whatsapp"></i></div>
+                        <div>
+                            <h4><?php esc_html_e( 'WhatsApp', 'dpw-psi-papeng' ); ?></h4>
+                            <p><a href="https://wa.me/<?php echo esc_attr( preg_replace( '/[^0-9]/', '', $wa_number ) ); ?>"><?php echo esc_html( $wa_number ); ?></a></p>
+                        </div>
                     </div>
                 </div>
-                <?php endif; ?>
 
-                <!-- WhatsApp Quick Contact -->
-                <a href="<?php echo esc_url( dpw_psi_wa_link( '', 'Halo, saya ingin bertanya tentang DPW PSI Papua Pegunungan.' ) ); ?>" target="_blank" rel="noopener" class="btn btn-success btn-lg w-100 fw-bold mb-3">
-                    <i class="bi bi-whatsapp me-2"></i><?php esc_html_e( 'Chat via WhatsApp', 'dpw-psi-papeng' ); ?>
-                </a>
+                <!-- Map -->
+                <div class="contact-map">
+                    <iframe src="<?php echo esc_url( $map_url ); ?>" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
 
-                <!-- Social Links -->
-                <div class="dpw-contact-social">
-                    <h6 class="fw-bold mb-3"><?php esc_html_e( 'Ikuti Kami', 'dpw-psi-papeng' ); ?></h6>
-                    <div class="d-flex gap-2">
-                        <?php
-                        $socials = [
-                            'facebook'  => [ 'icon' => 'bi-facebook', 'color' => '#1877F2' ],
-                            'twitter'   => [ 'icon' => 'bi-twitter-x', 'color' => '#000' ],
-                            'instagram' => [ 'icon' => 'bi-instagram', 'color' => '#E4405F' ],
-                            'youtube'   => [ 'icon' => 'bi-youtube', 'color' => '#FF0000' ],
-                            'tiktok'    => [ 'icon' => 'bi-tiktok', 'color' => '#000' ],
-                        ];
-                        foreach ( $socials as $key => $s ) :
-                            $url = dpw_psi_get_option( 'social_' . $key );
-                            if ( $url ) :
-                        ?>
-                        <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener" class="btn btn-lg rounded-circle text-white shadow-sm" style="background-color:<?php echo esc_attr( $s['color'] ); ?>" aria-label="<?php echo esc_attr( ucfirst( $key ) ); ?>">
-                            <i class="bi <?php echo esc_attr( $s['icon'] ); ?>"></i>
-                        </a>
-                        <?php endif; endforeach; ?>
-                    </div>
+            <!-- Right: Form -->
+            <div class="psi-animate-right">
+                <div class="contact-form-card" id="contactFormCard">
+                    <h3><?php esc_html_e( 'Kirim Pesan', 'dpw-psi-papeng' ); ?></h3>
+                    <p><?php esc_html_e( 'Isi formulir di bawah ini dan kami akan segera merespons.', 'dpw-psi-papeng' ); ?></p>
+                    
+                    <form id="psiContactForm" method="post">
+                        <?php wp_nonce_field( 'dpw_psi_nonce', 'contact_nonce' ); ?>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName"><?php esc_html_e( 'Nama Lengkap', 'dpw-psi-papeng' ); ?> <span class="required">*</span></label>
+                                <input type="text" id="contactName" name="name" class="form-control" placeholder="<?php esc_attr_e( 'Masukkan nama Anda', 'dpw-psi-papeng' ); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail"><?php esc_html_e( 'Email', 'dpw-psi-papeng' ); ?> <span class="required">*</span></label>
+                                <input type="email" id="contactEmail" name="email" class="form-control" placeholder="<?php esc_attr_e( 'Masukkan email Anda', 'dpw-psi-papeng' ); ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject"><?php esc_html_e( 'Subjek', 'dpw-psi-papeng' ); ?></label>
+                            <input type="text" id="contactSubject" name="subject" class="form-control" placeholder="<?php esc_attr_e( 'Subjek pesan', 'dpw-psi-papeng' ); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage"><?php esc_html_e( 'Pesan', 'dpw-psi-papeng' ); ?> <span class="required">*</span></label>
+                            <textarea id="contactMessage" name="message" class="form-control" rows="6" placeholder="<?php esc_attr_e( 'Tulis pesan Anda di sini...', 'dpw-psi-papeng' ); ?>" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" id="contactSubmitBtn" style="width: 100%; justify-content: center;">
+                            <i class="bi bi-send"></i> <?php esc_html_e( 'Kirim Pesan', 'dpw-psi-papeng' ); ?>
+                        </button>
+                    </form>
+                    <div id="contactFormMsg" style="margin-top: 16px; display: none;"></div>
                 </div>
             </div>
         </div>
-
-        <!-- Page Content (if any) -->
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-            $content = get_the_content();
-            if ( ! empty( trim( $content ) ) ) :
-        ?>
-        <div class="mt-5 pt-4 border-top dpw-page-content lh-lg">
-            <?php echo dpw_psi_safe_html( $content ); ?>
-        </div>
-        <?php endif; endwhile; endif; ?>
     </div>
 </section>
 
