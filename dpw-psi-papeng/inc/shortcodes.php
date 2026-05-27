@@ -160,6 +160,15 @@ add_action( 'wp_ajax_nopriv_dpw_contact_send', 'dpw_psi_contact_send' );
 function dpw_psi_contact_send(): void {
     check_ajax_referer( 'dpw_psi_contact', 'nonce' );
 
+    /* Rate limiting */
+    $ip        = ! empty( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+    $transient = 'psi_rl_contact_' . md5( $ip );
+    $count     = (int) get_transient( $transient );
+    if ( $count >= 3 ) {
+        wp_send_json_error( [ 'message' => __( 'Terlalu banyak permintaan. Silakan tunggu 1 menit.', 'dpw-psi-papeng' ) ] );
+    }
+    set_transient( $transient, $count + 1, 60 );
+
     $name    = sanitize_text_field( $_POST['name'] ?? '' );
     $email   = sanitize_email( $_POST['email'] ?? '' );
     $subject = sanitize_text_field( $_POST['subject'] ?? '' );
