@@ -26,7 +26,8 @@ define( 'PSI_PAPENG_BASENAME', plugin_basename( __FILE__ ) );
 register_activation_hook( __FILE__, 'psi_papeng_activate' );
 function psi_papeng_activate(): void {
     require_once PSI_PAPENG_DIR . 'includes/class-member-management.php';
-    PSI_Papeng_Member_Management::create_tables();
+    \PSI_Papeng\PSI_Papeng_Member_Management::create_tables();
+    \PSI_Papeng\PSI_Papeng_Activity_Log::create_table();
     flush_rewrite_rules();
 }
 
@@ -45,6 +46,7 @@ require_once PSI_PAPENG_DIR . 'includes/class-performance.php';
 require_once PSI_PAPENG_DIR . 'includes/class-activity-log.php';
 require_once PSI_PAPENG_DIR . 'includes/class-admin-panel.php';
 require_once PSI_PAPENG_DIR . 'includes/class-member-statistics.php';
+require_once PSI_PAPENG_DIR . 'includes/class-bootstrap-hooks.php';
 
 /* ── Initialize ─────────────────────────────────────────────── */
 add_action( 'plugins_loaded', 'psi_papeng_init' );
@@ -55,16 +57,17 @@ function psi_papeng_init(): void {
 add_action( 'init', 'psi_papeng_boot' );
 function psi_papeng_boot(): void {
     if ( is_admin() ) {
-        new PSI_Papeng_Admin_Panel();
-        new PSI_Papeng_Member_Statistics();
+        new \PSI_Papeng\PSI_Papeng_Admin_Panel();
+        new \PSI_Papeng\PSI_Papeng_Member_Statistics();
     }
-    new PSI_Papeng_Member_Management();
-    new PSI_Papeng_Member_Dashboard();
-    new PSI_Papeng_WhatsApp();
-    new PSI_Papeng_Email();
-    new PSI_Papeng_SEO();
-    new PSI_Papeng_Performance();
-    new PSI_Papeng_Activity_Log();
+    new \PSI_Papeng\PSI_Papeng_Member_Management();
+    new \PSI_Papeng\PSI_Papeng_Member_Dashboard();
+    new \PSI_Papeng\PSI_Papeng_WhatsApp();
+    new \PSI_Papeng\PSI_Papeng_Email();
+    new \PSI_Papeng\PSI_Papeng_SEO();
+    new \PSI_Papeng\PSI_Papeng_Performance();
+    new \PSI_Papeng\PSI_Papeng_Activity_Log();
+    new \PSI_Papeng\PSI_Papeng_Bootstrap_Hooks();
 }
 
 /* ── Plugin Row Meta ────────────────────────────────────────── */
