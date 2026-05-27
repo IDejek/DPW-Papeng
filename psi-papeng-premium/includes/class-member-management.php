@@ -25,6 +25,18 @@ class PSI_Papeng_Member_Management {
         add_shortcode( 'psi_member_form', [ $this, 'render_form' ] );
     }
 
+    /* ── Rate Limiting ──────────────────────────────────────── */
+    private function is_rate_limited( string $action, int $max = 3, int $seconds = 60 ): bool {
+        $ip        = ! empty( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+        $transient = 'psi_rl_' . md5( $action . $ip );
+        $count     = (int) get_transient( $transient );
+        if ( $count >= $max ) {
+            return true;
+        }
+        set_transient( $transient, $count + 1, $seconds );
+        return false;
+    }
+
     public static function create_tables(): void {
         global $wpdb;
         $charset = $wpdb->get_charset_collate();
@@ -158,6 +170,11 @@ class PSI_Papeng_Member_Management {
     public function ajax_register(): void {
         check_ajax_referer( 'psi_member_register', 'nonce' );
 
+        /* Rate limiting */
+        if ( $this->is_rate_limited( 'member_register', 3, 60 ) ) {
+            wp_send_json_error( [ 'message' => __( 'Terlalu banyak permintaan. Silakan tunggu 1 menit.', 'psi-papeng-premium' ) ] );
+        }
+
         global $wpdb;
         $table = $this->table;
 
@@ -202,20 +219,16 @@ class PSI_Papeng_Member_Management {
 
         $member_id = $wpdb->insert_id;
 
-        // Update kabupaten stats
         $this->update_kab_stats( $data['kabupaten'] );
 
-        // Log activity
         if ( class_exists( 'PSI_Papeng_Activity_Log' ) ) {
             PSI_Papeng_Activity_Log::log( 'member_registered', sprintf( 'Pendaftaran anggota baru: %s (%s)', $data['full_name'], $data['email'] ) );
         }
 
-        // Send email
         if ( class_exists( 'PSI_Papeng_Email' ) ) {
             PSI_Papeng_Email::send_registration_notification( $data, $member_id );
         }
 
-        // WhatsApp notification
         if ( class_exists( 'PSI_Papeng_WhatsApp' ) ) {
             PSI_Papeng_WhatsApp::notify_new_member( $data );
         }
@@ -257,7 +270,6 @@ class PSI_Papeng_Member_Management {
             wp_send_json_error( [ 'message' => __( 'Gagal memperbarui status.', 'psi-papeng-premium' ) ] );
         }
 
-        // Send verification email
         if ( $status === 'verified' && class_exists( 'PSI_Papeng_Email' ) ) {
             $member = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE id = %d", $id ) );
             if ( $member ) {
@@ -311,7 +323,7 @@ class PSI_Papeng_Member_Management {
 
     public static function get_members( array $args = [] ): array {
         global $wpdb;
-        $table = $wpdb->prefix . 'psi_members';
+        $table    = $wpdb->prefix . 'psi_members';
         $per_page = absint( $args['per_page'] ?? 20 );
         $paged    = absint( $args['paged'] ?? 1 );
         $offset   = ( $paged - 1 ) * $per_page;
@@ -341,11 +353,11 @@ class PSI_Papeng_Member_Management {
         $rows = $wpdb->get_results( $wpdb->prepare( $sql, $values ) );
 
         return [
-            'rows'      => $rows,
-            'total'     => $total,
-            'per_page'  => $per_page,
-            'paged'     => $paged,
-            'total_pages' => (int) ceil( $total / max( $per_page, 1 ) ),
+            'rows'         => $rows,
+            'total'        => $total,
+            'per_page'     => $per_page,
+            'paged'        => $paged,
+            'total_pages'  => (int) ceil( $total / max( $per_page, 1 ) ),
         ];
     }
 
